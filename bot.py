@@ -8,8 +8,10 @@ IMAGE_DIR = None
 async def save_attachment(attachment, path):
     target_name = os.path.join(path, attachment.filename)
     target_part = target_name + ".part"
+    print("Saving as", target_part)
     with open(target_part, "wb") as f:
         await attachment.save(f)
+    print("Renaming", target_part, "to", target_name)
     os.rename(target_part, target_name)
     print(attachment.filename, "saved")
 
